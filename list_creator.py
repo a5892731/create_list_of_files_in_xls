@@ -6,10 +6,8 @@ date: 2020-11-01
 
 #import openpyxl
 #import os
-#import time
 #from time import sleep
 from os import listdir, getcwd, chdir
-
 from openpyxl import Workbook
 wb = Workbook()
 ws = wb.active
@@ -17,6 +15,7 @@ ws = wb.active
 
 bufor_file = []
 bufor_folder = []
+bufor_folders = []
 bufor_column = []
 #----------------------------------------------------------------------------------------------------------------------
 #    files = os.listdir()
@@ -35,14 +34,15 @@ def delete_unwanted_names(out=[]):
         out.remove('.git')
     return out
 
-
-
-
 def sort(direction=getcwd(), files=listdir(), column = 1):
 
     global bufor_file
     global bufor_folder
+    global bufor_folders
     global bufor_column
+
+    foolder_tree = []
+    folders = []
 
     if files == []:
         return ''
@@ -55,7 +55,6 @@ def sort(direction=getcwd(), files=listdir(), column = 1):
     files = delete_unwanted_names(files)
 
 
-
     for i in range(len(files)):
         if '.' in files[i]:
             bufor_file.append(files[i])
@@ -66,14 +65,24 @@ def sort(direction=getcwd(), files=listdir(), column = 1):
         else:
             chdir(files[i])
             column += 1
-            bufor_file.append(sort(getcwd(), listdir(), column))
+
+            sort(getcwd(), listdir(), column)
+
             bufor_folder.append(getcwd())
             bufor_column.append(column)
+
+            bufor_folders.append(files[i])
+
             chdir('..')
             column -= 1
 
+def print_folders(folders_list, line_xls):
+    deeph = 0
+    for folder in ((folders_list).strip(getcwd())).split('\\'):
+        ws.cell(row=line_xls, column=2+ deeph, value=folder)
+        deeph += 1
 
-def printing(list1=[], list2=[], line_xls = 1, column_xls =-1):
+def printing(list1=[], list2=[], line_xls = 4, column_xls = 1):
 
     global bufor_column
 
@@ -81,39 +90,37 @@ def printing(list1=[], list2=[], line_xls = 1, column_xls =-1):
     if list1 == []:
         return False
 
-
     print('-------------------------')
-    column_xls += 1
+
+    ws.title = "Arkusz 1"
+
+    columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
+
+    for column in range(len(columns)):
+        ws.column_dimensions[columns[column]].width = 40
+
+    ws.append(('Lokalizacja folderu docelowego:', getcwd()))
+    ws.append(('-----------------', '-----------------'))
+    ws.append(('Plik:', ('Folder: ' + '> > >')))
+    ws.cell(row=3, column=max(bufor_column)+1, value='Pełny adres:')
 
     for i in range(len(list1)):
 
             if list1[i] is not None:
-                print('{} in {} >>>> R:{}/C:{}'.format(list1[i], list2[i], line_xls, bufor_column[i]))
-
-                ws.cell(row=line_xls, column=bufor_column[i], value=list1[i])
-                ws.cell(row=line_xls, column=bufor_column[i] + 1, value=list2[i])
-
-                #sleep(0.01)
+                print('{} in {} >>>> Row:{}/Deeph:{}'.format(list1[i], list2[i], line_xls, bufor_column[i]-1))
+                ws.cell(row=line_xls, column= 1, value=list1[i])
+                print_folders(list2[i], line_xls)
+                ws.cell(row=line_xls, column= max(bufor_column)+ 1, value=list2[i])
                 line_xls += 1
 
-    column_xls -= 1
+
+
+# ----------------------------------------------------PROGRAM------------------------------------------------------
 
 
 getcwd()
 
 sort()
-
-
-
-ws.title = "Arkusz 1"
-
-columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
-
-for column in range(len(columns)):
-    ws.column_dimensions[columns[column]].width = 40
-
-
-
 
 printing(bufor_file, bufor_folder)
 
@@ -121,6 +128,7 @@ chdir('create_list_of_files_in_xls')
 wb.save('LIST OF FILES.xlsx')
 
 wb.close()
+
 
 print('-------------------------------------------------------------')
 print('-------------------------------------------------------------')
