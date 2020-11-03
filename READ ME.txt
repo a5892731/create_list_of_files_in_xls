@@ -5,7 +5,7 @@ list_creator.py v 1.1
 
 #----------------------------------------
 1) Przenieś folder "create_list_of_files_xls" do katalogu z plikami których listę chcesz wygenerować.
-2) Wejdź do folderu "create_list_of_files_xls" i włącz program "list_creator.py" (UWAGA: wymagana instalacja Python 3.8)
+2) Wejdź do folderu "create_list_of_files_xls" i włącz program "list_creator.py" (UWAGA: wymagana instalacja Python 3.8 z biblioteką openpyxl)
 3) Program utworzy plik "LIST OF FILES.xls" zawierający listę wszystkich plików w folderze i podfolderach wybranej lokalizacji z punktu 1)
 #----------------------------------------
 1) Move the folder "create_list_of_files_xls" to the directory with the files you want to generate list.
