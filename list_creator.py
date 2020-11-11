@@ -4,11 +4,15 @@ date: 2020-11-01
 
 """
 
-#import openpyxl
-#import os
 #from time import sleep
 from os import listdir, getcwd, chdir
+#from openpyxl import Workbook
+# import os
+# from time import sleep
+from os import listdir, getcwd, chdir
+
 from openpyxl import Workbook
+
 wb = Workbook()
 ws = wb.active
 

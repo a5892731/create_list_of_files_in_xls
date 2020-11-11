@@ -1,4 +1,4 @@
-2020-11-02
+﻿2020-11-02
 
 list_creator.py v 1.1
 
@@ -9,5 +9,23 @@ list_creator.py v 1.1
 3) Program utworzy plik "LIST OF FILES.xls" zawierający listę wszystkich plików w folderze i podfolderach wybranej lokalizacji z punktu 1)
 #----------------------------------------
 1) Move the folder "create_list_of_files_xls" to the directory with the files you want to generate list.
-2) Go to the "create_list_of_files_xls" folder and run the "list_creator.py" program (NOTE: Python 3.8 installation required > https://www.python.org/downloads/)
+2) Go to the "create_list_of_files_xls" folder and run the "list_creator.py" program (NOTE: Python 3.8  with openpyxl libery installation required > https://www.python.org/downloads/)
 3) The program will create a "LIST OF FILES.xls" file containing a list of all files in the folder and subfolders of the selected location from point 1)
+
+
+
+
+##########################################################################################################################
+
+2020-11-11
+list_creator.py v 2.0
+
+
+#----------------------------------------
+1) Wejdź do folderu "create_list_of_files_xls" i włącz program "list_creator_v2.0.py" (UWAGA: wymagana instalacja Python 3.8 z biblioteką openpyxl)ć.
+2) Podaj adres folderu z plikami, które chcesz skatalogować
+3) Program utworzy plik "LIST OF FILES.xls" zawierający listę wszystkich plików w folderze i podfolderach wybranej lokalizacji z punktu 2)
+#----------------------------------------
+1) Go to the "create_list_of_files_xls" folder and run the "list_creator.py" program (NOTE: Python 3.8  with openpyxl libery installation required > https://www.python.org/downloads/)
+2) Input ardes of folder with filest to catalogue
+3) The program will create a "LIST OF FILES.xls" file containing a list of all files in the folder and subfolders of the selected location from point 2)
